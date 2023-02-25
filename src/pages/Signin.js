@@ -18,6 +18,12 @@ export default function Signin() {
     navigate("/");
   };
 
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 32) {
+      event.preventDefault();
+    }
+  };
+
   return (
     <div className="profile">
       <div className="profile-img"></div>
@@ -30,11 +36,7 @@ export default function Signin() {
               required
               value={username}
               onChange={(event) => setUsername(event.target.value)}
-              onKeyPress={(event) => {
-                if (event.key === " ") {
-                  event.preventDefault();
-                }
-              }}
+              onKeyDown={handleKeyDown}
             />
             <label>Username</label>
           </div>
