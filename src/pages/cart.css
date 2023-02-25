@@ -44,6 +44,10 @@
   cursor: not-allowed;
 }
 
+.cart__info > *:not(:last-child) {
+  margin-bottom: 10px;
+}
+
 .cart__info {
   display: flex;
   flex-direction: column;
@@ -86,6 +90,25 @@
 .cart__total {
   font-weight: 600;
   color: var(--primary-text);
+}
+
+.cart__back {
+  font-size: calc(1rem + 0.7vmin);
+  background: var(--primary-text);
+  color: var(--second-text);
+  border-radius: 2.5rem;
+  max-height: 54px;
+  border: 2px solid transparent;
+  text-transform: uppercase;
+  padding: 1.4rem 3.2rem;
+  font-weight: 700;
+  transition: 0.3s all ease;
+}
+
+.cart__back:hover {
+  color: var(--primary-text);
+  border-color: var(--primary-text);
+  background-color: var(--second-text);
 }
 
 @media (max-width: 40em) {

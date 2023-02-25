@@ -117,10 +117,17 @@ html {
 .info-header {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   -moz-gap: 20px;
   gap: 20px;
 }
+
+.info-header__buttons,
+.info-header__user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .info-header__cart {
   color: inherit;
   font-size: clamp(2.5rem, 3.5vw, 4rem);
@@ -194,13 +201,18 @@ html {
     font-size: 1.4rem;
   }
 }
-
-@media (max-width: 25em) {
+@media (max-width: 440px) {
+  .info-header__user {
+    order: 2;
+  }
   .info-header__avatar {
     order: 2;
   }
+}
+
+@media (max-width: 25em) {
   .info-header__btn {
     padding: 0.7rem 1.5rem;
-    flex-basis: 40%;
+    /* flex-basis: 40%; */
   }
 }

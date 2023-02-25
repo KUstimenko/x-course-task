@@ -30,19 +30,25 @@ export default function Header() {
         )}
       </h2>
       {username && (
-        <div div className="info-header">
-          <button
-            type="button"
-            className="info-header__cart"
-            onClick={() => navigate("/cart")}
-          >
-            <i className="fa-solid fa-cart-shopping"></i>
-          </button>
-          <button className="info-header__btn" onClick={handleLogout}>
-            Sign-Out
-          </button>
-          <div className="info-header__avatar"></div>
-          <span className="username">{sessionStorage.getItem("username")}</span>
+        <div className="info-header">
+          <div className="info-header__buttons">
+            <button
+              type="button"
+              className="info-header__cart"
+              onClick={() => navigate("/cart")}
+            >
+              <i className="fa-solid fa-cart-shopping"></i>
+            </button>
+            <button className="info-header__btn" onClick={handleLogout}>
+              Sign-Out
+            </button>
+          </div>
+          <div className="info-header__user">
+            <div className="info-header__avatar"></div>
+            <span className="username">
+              {sessionStorage.getItem("username")}
+            </span>
+          </div>
         </div>
       )}
     </header>

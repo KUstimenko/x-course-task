@@ -49,6 +49,7 @@ export default function Cart() {
         <div className="cart__info">
           <img src={cart} alt="cart" className="cart__img" />
           <h2 className="cart__text">Cart empty..</h2>
+          <button className="cart__back" onClick={() => navigate("/")}>Back to the BookList</button>
         </div>
       ) : (
         <div className="cart__content">
