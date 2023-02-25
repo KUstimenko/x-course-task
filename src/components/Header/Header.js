@@ -8,8 +8,9 @@ export default function Header() {
   const navigate = useNavigate();
   const username = sessionStorage.getItem("username");
   const handleLogout = () => {
+    localStorage.clear();
     sessionStorage.removeItem("username");
-    localStorage.removeItem("cartItems");
+    // localStorage.removeItem("cartItems");
     navigate("/signin");
   };
 
