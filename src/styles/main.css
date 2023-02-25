@@ -195,6 +195,9 @@ html {
 }
 
 @media (max-width: 25em) {
+  .info-header__avatar {
+    order: 2;
+  }
   .info-header__btn {
     padding: 0.7rem 1.5rem;
     flex-basis: 40%;
