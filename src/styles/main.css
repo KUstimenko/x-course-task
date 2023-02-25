@@ -90,11 +90,6 @@ html {
 }
 
 /*-------HEADER------*/
-/* .count {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--primary-text);
-} */
 .header {
   width: 100%;
   background: var(--main-text);

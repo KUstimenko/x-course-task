@@ -181,6 +181,9 @@
     margin-bottom: 1.5rem;
     padding-bottom: 120%;
   }
+  .books__btn {
+    padding: 0.6rem 2.5rem;
+  }
 }
 
 @media (max-width: 19em) {
