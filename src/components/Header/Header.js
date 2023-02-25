@@ -18,7 +18,7 @@ export default function Header() {
     <header className="header">
       <h2 className="header__title">
         <Link to="/" className="header__logo" rel="noopener noreferrer">
-          js band store
+          {username && <i className="fa-solid fa-house"></i>} js band store
         </Link>{" "}
         {username && (
           <>
