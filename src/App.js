@@ -9,11 +9,13 @@ import Signin from "./pages/Signin";
 import BookContextProvider from "./context/BookContext";
 import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
+import ScrollToTop from "./utils/scrollToTop";
 
 export default function App() {
   return (
     <BookContextProvider>
       <HashRouter basename="/">
+        <ScrollToTop />
         <Header />
         <Routes>
           <Route path="/" element={<BookList />} />
