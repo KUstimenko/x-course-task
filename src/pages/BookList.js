@@ -18,6 +18,7 @@ export default function BookList() {
 
   useEffect(() => {
     setFilteredBooks(books);
+    window.scrollTo(0, 0);
   }, [books]);
 
   const handleSearch = (event) => {
@@ -61,62 +62,64 @@ export default function BookList() {
 
   return (
     <main className="main container">
-      <div className="main__search search">
-        <form action="#" className="search__content">
-          <input
-            autoComplete="off"
-            required
-            type="text"
-            name="search"
-            className="search__input"
-            placeholder="Search by book name"
-            onChange={handleSearch}
-          />
-          <button type="button" className="search__btn" disabled>
-            <i className="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </form>
-        <div className="main__filter filter-price">
-          <select
-            name="select-price"
-            id="select-price"
-            required
-            onChange={handlePriceFilter}
-          >
-            <option value="all">All </option>
-            <option value="0-15">$0 - $15</option>
-            <option value="15-30">$15 - $30</option>
-            <option value="30+">$30 and above</option>
-          </select>
+      <div id="top>">
+        <div className="main__search search">
+          <form action="#" className="search__content">
+            <input
+              autoComplete="off"
+              required
+              type="text"
+              name="search"
+              className="search__input"
+              placeholder="Search by book name"
+              onChange={handleSearch}
+            />
+            <button type="button" className="search__btn" disabled>
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+          <div className="main__filter filter-price">
+            <select
+              name="select-price"
+              id="select-price"
+              required
+              onChange={handlePriceFilter}
+            >
+              <option value="all">All </option>
+              <option value="0-15">$0 - $15</option>
+              <option value="15-30">$15 - $30</option>
+              <option value="30+">$30 and above</option>
+            </select>
+          </div>
         </div>
-      </div>
 
-      <div className="books-list">
-        {filteredBooks.map((book) => (
-          <figure className="books-item" key={book.id}>
-            <div className="books-image ibg">
-              <img
-                src={book.image || imageNotFound}
-                alt={book.title}
-                className="books-img"
-                onError={handleImageError}
-              />
-            </div>
-            <div className="books">
-              <h2 className="books__title">{truncateText(book.title, 24)}</h2>
-              <p className="books__author">{book.author}</p>
-              <div className="books__details">
-                <span className="books__price">${book.price}</span>
-                <button
-                  className="books__btn"
-                  onClick={() => navigate("/specific-book/" + book.id)}
-                >
-                  View
-                </button>
+        <div className="books-list">
+          {filteredBooks.map((book) => (
+            <figure className="books-item" key={book.id}>
+              <div className="books-image ibg">
+                <img
+                  src={book.image || imageNotFound}
+                  alt={book.title}
+                  className="books-img"
+                  onError={handleImageError}
+                />
               </div>
-            </div>
-          </figure>
-        ))}
+              <div className="books">
+                <h2 className="books__title">{truncateText(book.title, 24)}</h2>
+                <p className="books__author">{book.author}</p>
+                <div className="books__details">
+                  <span className="books__price">${book.price}</span>
+                  <button
+                    className="books__btn"
+                    onClick={() => navigate("/specific-book/" + book.id)}
+                  >
+                    View
+                  </button>
+                </div>
+              </div>
+            </figure>
+          ))}
+        </div>
       </div>
     </main>
   );
