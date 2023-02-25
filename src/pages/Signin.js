@@ -18,9 +18,12 @@ export default function Signin() {
     navigate("/");
   };
 
-  const handleKeyDown = (event) => {
-    if (event.keyCode === 32) {
-      event.preventDefault();
+  const handleInput = (event) => {
+    const value = event.target.value.trim();
+    if (value.length === 0 || value.indexOf(" ") !== -1) {
+      setUsername(value.replace(/\s/g, ""));
+    } else {
+      setUsername(value);
     }
   };
 
@@ -35,8 +38,7 @@ export default function Signin() {
               name="username"
               required
               value={username}
-              onChange={(event) => setUsername(event.target.value)}
-              onKeyDown={handleKeyDown}
+              onInput={handleInput}
             />
             <label>Username</label>
           </div>
