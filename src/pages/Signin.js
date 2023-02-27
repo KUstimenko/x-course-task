@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "../pages/signin.css";
 
 export default function Signin() {
-  window.scrollTo(0, 0);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
