@@ -12,6 +12,10 @@ export default function Signin() {
     setButtonDisabled(username.length < 4 || username.length > 16);
   }, [username]);
 
+  useEffect(() => {
+    sessionStorage.removeItem("username");
+  }, []);
+
   const handleSignIn = (event) => {
     event.preventDefault();
     sessionStorage.setItem("username", username);
