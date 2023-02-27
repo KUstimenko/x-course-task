@@ -1,22 +1,23 @@
 import React, { useState, useEffect, useContext } from "react";
 import "../pages/specificbook.css";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import imageNotFound from "../utils/imageNotFound.png";
 import { BookContext } from "../context/BookContext";
 
 export default function SpecificBook() {
-  useEffect(() => {
-    const username = sessionStorage.getItem("username");
-    if (!username) {
-      window.location.href = "/signin";
-    }
-  }, []);
-
+  const navigate = useNavigate();
   const [book, setBook] = useState({});
   const { books } = useContext(BookContext);
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const username = sessionStorage.getItem("username");
+    if (!username) {
+      navigate("/signin");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     if (books.length > 0) {
@@ -135,7 +136,7 @@ export default function SpecificBook() {
             </div>
           </div>
           <div className="form-book__total row">
-            <label htmlFor="total-price">Total price</label>
+            <label htmlFor="total-price">Total price, $</label>
             <span type="text" id="total" disabled>
               {total.toFixed(2)}
             </span>

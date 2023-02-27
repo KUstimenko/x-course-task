@@ -1,16 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-// import { UserContext } from "../../context/UserContext";
 
 export default function Header() {
-  // const { user, handleSignOut } = useContext(UserContext);
   const navigate = useNavigate();
   const username = sessionStorage.getItem("username");
   const handleLogout = () => {
     localStorage.clear();
     sessionStorage.removeItem("username");
-    // localStorage.removeItem("cartItems");
     navigate("/signin");
   };
 
@@ -22,10 +19,7 @@ export default function Header() {
         </Link>{" "}
         {username && (
           <>
-            /{" "}
-            <span className="username">
-              {sessionStorage.getItem("username")}
-            </span>
+            / <span className="username">{username}</span>
           </>
         )}
       </h2>
@@ -45,9 +39,7 @@ export default function Header() {
           </div>
           <div className="info-header__user">
             <div className="info-header__avatar"></div>
-            <span className="username">
-              {sessionStorage.getItem("username")}
-            </span>
+            <span className="username">{username}</span>
           </div>
         </div>
       )}

@@ -65,6 +65,12 @@ input {
   background: none;
 }
 
+select {
+  background: none;
+  font-family: inherit;
+  color: inherit;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -189,6 +195,7 @@ html {
 
 @media (max-width: 65em) {
   .info-header {
+    row-gap: 1rem;
     justify-content: end;
     width: 100%;
   }
