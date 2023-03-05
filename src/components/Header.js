@@ -3,12 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 
 export default function Header() {
-  const { cart } = useContext(CartContext);
+  const { cart, clearCart } = useContext(CartContext);
   const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
   const navigate = useNavigate();
   const username = localStorage.getItem("username");
   const handleLogout = () => {
     localStorage.clear();
+    clearCart();
     navigate("/signin");
   };
 

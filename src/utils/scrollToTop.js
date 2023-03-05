@@ -4,9 +4,7 @@ export default function ScrollToTop() {
   useEffect(() => {
     const timer = setTimeout(() => {
       window.scrollTo(0, 0);
-    }, 100);
+    }, 200);
     return () => clearTimeout(timer);
-  }, []);
-
-  return null;
+  });
 }

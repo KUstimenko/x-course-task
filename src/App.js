@@ -54,14 +54,14 @@ export default function App() {
               />
               <Route path="/cart" element={<Cart />} />
               <Route
-                path="/book/:id"
-                element={
-                  <>
-                    <SpecificBook />
-                    <ScrollToTop />
-                  </>
-                }
-              />
+              path="/book/:id"
+              element={
+                <>
+                  <SpecificBook />
+                  <ScrollToTop />
+                </>
+              }
+            />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />
