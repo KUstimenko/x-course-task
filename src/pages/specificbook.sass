@@ -1,0 +1,179 @@
+.specific-book
+  padding: 3rem .5rem
+
+.row 
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+.book 
+  display: grid
+  gap: 2rem
+  grid-template-columns: repeat(3, 1fr)
+  margin-bottom: 3rem
+
+.book__img
+  align-self: start
+  display: flex
+  justify-content: center
+  align-items: center
+
+.book__img img
+  border-radius: 1.6rem
+  max-width: 100%
+  height: auto
+
+.book__info
+  padding: 0 1.5rem
+
+.book__info > *:not(:last-child)
+  margin-bottom: 2rem
+
+.book__title,
+.book__text 
+  font-size: 2.4rem
+  font-weight: 700
+  line-height: 142%
+
+.book__description 
+  font-size: 1.8rem
+  line-height: 150%
+
+.form-book 
+  border: 1px dashed var(--main-text)
+  font-size: calc(1rem + 1.7vmin)
+  color: var(--main-text)
+  border-radius: 1.6rem
+  font-weight: 700
+  padding: 1.5rem
+
+.form-book > *:not(:last-child)
+  margin-bottom: 2rem
+
+.form-book__info > *:not(:last-child)
+  margin-bottom: 2rem
+
+
+.form-book__btn
+  display: flex
+  justify-content: center
+  align-items: center
+  font-size: calc(1rem + 1.7vmin)
+  background: var(--primary-text)
+  color: var(--second-text)
+  text-transform: uppercase
+  padding: 1.5rem 3.2rem
+  border-radius: 2.5rem
+  font-weight: 700
+  border: 2px solid transparent
+  transition: 0.3s all ease
+
+.form-book__btn:hover 
+  opacity: 0.8
+  color: var(--primary-text)
+  border-color: var(--primary-text)
+  background-color: var(--second-text)
+
+.count__wrapper 
+  width: 8rem
+  border-radius: 1.2rem
+  display: flex
+  border: 2px solid #a79a9a
+
+.count__wrapper:hover
+  box-shadow: 0 0 0 0.8rem rgba(72, 166, 228, 0.502)
+
+.count__box1 
+  width: 6rem
+  display: flex
+  justify-content: flex-end
+  align-items: center
+  border-right: 2px solid #a79a9a
+
+.count button 
+  cursor: pointer
+
+.count__up,
+.count__down 
+  display: flex
+  justify-content: center
+  align-items: center
+  width: 2rem
+  height: 2.5rem
+
+.count__down 
+  border-top: 0.5px solid #a79a9a
+
+.count__up 
+  border-bottom: 0.5px solid #a79a9a
+
+.count i 
+  color: var(--main-text)
+  font-size: calc(1rem + 2vmin)
+
+#quantity 
+  width: 3rem
+  color: #a79a9a
+  font-size: calc(1rem + 2vmin)
+  font-weight: 600
+
+.btn,
+.added-to-cart
+  display: flex
+  justify-content: flex-end
+
+.description-book 
+  padding: 0 3.5rem
+
+.added-to-cart__text
+  border: 1px dashed var(--main-text)
+  font-size: calc(1rem + 1.7vmin)
+  display: flex
+  justify-content: center
+  align-items: center
+  max-height: 30rem
+  color: var(--main-text)
+  border-radius: 1.6rem
+  padding: 1rem 2rem
+
+
+
+
+.description-book__title 
+  font-size: calc(1rem + 2vmin)
+  letter-spacing: 0.2px
+  font-weight: 700
+  line-height: 142%
+  margin-bottom: 2rem
+
+.description-book__text 
+  font-size: calc(1rem + 1.1vmin)
+  letter-spacing: 0.05px
+  text-align: justify
+  line-height: 172%
+
+@media (max-width: 970px) 
+  .book 
+    grid-template-columns: repeat(2, 1fr)
+  
+  .book__form 
+    margin: 0 auto
+    width: 100%
+    grid-column: span 2
+  
+@media (max-width: 700px) 
+  .book 
+    grid-template-columns: 1fr
+  
+  .book__form 
+    margin: 0 auto
+    grid-column: span 1
+
+  .description-book 
+    padding: 1.5rem
+
+@media (max-width: 576px) 
+  .form-book__btn 
+    width: 100%
+  
+

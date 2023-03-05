@@ -1,0 +1,155 @@
+.cart
+  background: var(--second-text)
+  border-radius: .5rem
+  padding: 2rem
+
+.cart__title 
+  font-size: 2.4rem
+  font-weight: 600
+  margin-bottom: 2rem
+
+.cart__purchase
+  font-size: calc(1rem + 1vmin)
+  background: var(--primary-text)
+  color: var(--second-text)
+  border-radius: 2.5rem
+  max-height: 54px
+  border: 2px solid transparent
+  text-transform: uppercase
+  padding: 1.5rem 2.5rem
+  font-weight: 700
+  transition: 0.3s all ease
+  margin-bottom: 3rem
+
+.cart__purchase:hover 
+  color: var(--primary-text)
+  border-color: var(--primary-text)
+  background-color: var(--second-text)
+
+.cart__purchase:disabled
+  background-color: gray
+  color: #fff
+  cursor: not-allowed
+
+.cart-header 
+  display: flex
+  align-items: center
+  justify-content: space-between
+  border-bottom: 1px solid #ccc
+  padding: 1rem 0
+  margin-bottom: 1rem
+  font-size: 1.8rem
+  font-weight: 600
+
+.cart-header__info
+  flex: 3
+
+.cart-header__quantity,
+.cart-header__price,
+.cart-header__total,
+.cart-header__remove
+  flex: 1
+  text-align: center
+
+.cart-items
+  display: flex
+  flex-direction: column
+  margin-bottom: 2rem
+
+.cart-item
+  display: flex
+  align-items: center
+  justify-content: space-between
+  border-bottom: 1px solid #ccc
+  padding: 1rem 0
+  font-size: calc(1rem + 0.7vmin)
+
+.cart-item__info
+  flex: 3
+
+.cart-item__quantity,
+.cart-item__price,
+.cart-item__total
+  flex: 1
+  text-align: center
+
+.cart-item__quantity
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+.cart-item__btn
+  color: var(--primary-text)
+
+.cart-item__remove
+  flex: 1
+  text-align: center
+
+.cart-item__btn-remove:hover
+  color: var(--primary-text)
+
+
+.cart-footer
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 1rem 0
+  border-top: 1px solid #ccc
+
+.cart-total
+  font-size: 1.8rem
+  font-weight: 700
+  color: var(--primary-text)
+
+.cart__info > *:not(:last-child)
+  margin-bottom: 1rem
+
+.cart__info 
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.cart__img 
+  width: 10rem
+  height: 10rem
+
+.cart__text 
+  font-size: 2rem
+  font-weight: 600
+
+.cart__back 
+  font-size: calc(1rem + 0.7vmin)
+  background: var(--primary-text)
+  color: var(--second-text)
+  border-radius: 2.5rem
+  max-height: 54px
+  border: 2px solid transparent
+  text-transform: uppercase
+  padding: 1.4rem 3.2rem
+  font-weight: 700
+  transition: 0.3s all ease
+
+
+.cart__back:hover 
+  color: var(--primary-text)
+  border-color: var(--primary-text)
+  background-color: var(--second-text)
+
+
+@media (max-width: 50em)
+  .cart-header 
+    font-size: 1.4rem
+  .cart-item
+    font-size: 1.2rem
+  .cart__title
+    font-size: 1.8rem
+  .cart__text
+    font-size: 1.4rem
+
+@media (max-width: 40em)
+  .cart-header 
+    font-size: 1.2rem
+  .cart-item
+    font-size: 1rem
+
+

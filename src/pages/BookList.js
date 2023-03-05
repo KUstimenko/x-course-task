@@ -1,144 +1,70 @@
-import React, { useState, useEffect, useContext } from "react";
-import "../pages/booklist.css";
-import imageNotFound from "../utils/imageNotFound.png";
+import React, { useContext, useEffect, useState } from "react";
+import SearchComponent from "../components/SearchComponent";
+import SortComponent from "../components/SortComponent";
 import { BookContext } from "../context/BookContext";
-import { useNavigate } from "react-router-dom";
+import withAuth from "../components/withAuth";
+import BookItem from "../components/BookItem";
+import "../pages/bookslist.sass";
+import TypedText from "../utils/TypedText";
 
-export default function BookList() {
-  const { books } = useContext(BookContext);
-  const navigate = useNavigate();
+const BookList = () => {
+  const books = useContext(BookContext);
   const [filteredBooks, setFilteredBooks] = useState(books);
-  const [searchNotFound, setSearchNotFound] = useState(false);
-  const [search, setSearch] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortOption, setSortOption] = useState("All");
 
   useEffect(() => {
-    const username = sessionStorage.getItem("username");
-    if (!username) {
-      navigate("/signin");
+    let filteredBooksCopy = books;
+    if (sortOption === "0-15") {
+      filteredBooksCopy = books.filter((book) => book.price < 15);
+    } else if (sortOption === "15-30") {
+      filteredBooksCopy = books.filter(
+        (book) => book.price >= 15 && book.price < 30
+      );
+    } else if (sortOption === "30+") {
+      filteredBooksCopy = books.filter((book) => book.price >= 30);
     }
-  }, [navigate]);
 
-  useEffect(() => {
-    setFilteredBooks(books);
-  }, [books]);
-
-  const handleSearch = (event) => {
-    const search = event.target.value.toLowerCase();
-    const filteredBooks = books.filter((book) =>
-      book.title.toLowerCase().includes(search)
+    filteredBooksCopy = filteredBooksCopy.filter((book) =>
+      book.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    setFilteredBooks(filteredBooks);
-    setSearch(search);
-    setSearchNotFound(filteredBooks.length === 0);
+
+    setFilteredBooks(filteredBooksCopy);
+  }, [books, searchTerm, sortOption]);
+
+  const handleSort = (e) => {
+    setSortOption(e.target.value);
   };
 
-  const handlePriceFilter = (event) => {
-    const selectedPrice = event.target.value;
-    const filteredBooks =
-      selectedPrice === "all"
-        ? books
-        : books.filter((book) => {
-            if (selectedPrice === "0-15") {
-              return book.price > 0 && book.price < 15;
-            } else if (selectedPrice === "15-30") {
-              return book.price >= 15 && book.price < 30;
-            } else if (selectedPrice === "30+") {
-              return book.price >= 30;
-            }
-            return [];
-          });
-
-    setFilteredBooks(filteredBooks);
-    setSearchNotFound(filteredBooks.length === 0);
-  };
-
-  const handleImageError = (event) => {
-    event.target.src = imageNotFound;
-  };
-
-  const truncateText = (text, maxLength) => {
-    if (text.length > maxLength) {
-      return text.substr(0, maxLength) + "...";
-    } else {
-      return text;
-    }
+  const handleSearch = (searchTerm) => {
+    setSearchTerm(searchTerm);
   };
 
   const handleClear = () => {
-    setFilteredBooks(books);
-    setSearch("");
-    setSearchNotFound(false);
+    setSearchTerm("");
   };
 
   return (
     <div className="main">
-      <div className="main__search search">
-        <form action="#" className="search__content">
-          <input
-            autoComplete="off"
-            required
-            type="text"
-            name="search"
-            className="search__input"
-            placeholder="Search by book name"
-            onChange={handleSearch}
-            value={search}
-          />
-          {search && (
-            <button type="button" className="clear__btn" onClick={handleClear}>
-              <i className="fa-solid fa-close"></i>
-            </button>
-          )}
-          <button type="button" className="search__btn">
-            <i className="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </form>
-        <div className="main__filter filter-price">
-          <select
-            name="select-price"
-            id="select-price"
-            required
-            onChange={handlePriceFilter}
-          >
-            <option value="all">All </option>
-            <option value="0-15">$0 - $15</option>
-            <option value="15-30">$15 - $30</option>
-            <option value="30+">$30 and above</option>
-          </select>
+      <div className="search-and-sort">
+        <SearchComponent
+          handleSearch={handleSearch}
+          handleClear={handleClear}
+        />
+        <SortComponent handleSort={handleSort} />
+      </div>
+      {filteredBooks.length === 0 && (
+        <div className="search__not-found">{<TypedText />}</div>
+      )}
+      <div className="container">
+        <div className="books-list">
+          {filteredBooks.map((book) => (
+            <BookItem key={book.id} book={book} />
+          ))}
         </div>
       </div>
-      {searchNotFound && (
-        <div className="search__not-found">Nothing found...🙄</div>
-      )}
-
-      <div className="books-list container">
-        {filteredBooks.map((book) => (
-          <figure className="books-item" key={book.id}>
-            <div className="books-image ibg">
-              <img
-                src={book.image || imageNotFound}
-                alt={book.title}
-                className="books-img"
-                onError={handleImageError}
-              />
-            </div>
-            <div className="books">
-              <h2 className="books__title">{truncateText(book.title, 24)}</h2>
-              <p className="books__author">{book.author}</p>
-              <div className="books__details">
-                <span className="books__price">${book.price}</span>
-                <button
-                  className="books__btn"
-                  onClick={() => navigate("/specific-book/" + book.id)}
-                >
-                  View
-                </button>
-              </div>
-            </div>
-          </figure>
-        ))}
-      </div>
-      <div></div>
     </div>
   );
-}
+};
+
+export default withAuth(BookList);

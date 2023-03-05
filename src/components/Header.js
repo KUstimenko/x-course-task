@@ -1,13 +1,14 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 export default function Header() {
+  const { cart } = useContext(CartContext);
+  const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
   const navigate = useNavigate();
-  const username = sessionStorage.getItem("username");
+  const username = localStorage.getItem("username");
   const handleLogout = () => {
     localStorage.clear();
-    sessionStorage.removeItem("username");
     navigate("/signin");
   };
 
@@ -17,11 +18,7 @@ export default function Header() {
         <Link to="/" className="header__logo" rel="noopener noreferrer">
           {username && <i className="fa-solid fa-house"></i>} js band store
         </Link>{" "}
-        {username && (
-          <>
-            / <span className="username">{username}</span>
-          </>
-        )}
+        / <span className="fullname">Kostiantyn Ustymenko</span>
       </h2>
       {username && (
         <div className="info-header">
@@ -32,6 +29,7 @@ export default function Header() {
               onClick={() => navigate("/cart")}
             >
               <i className="fa-solid fa-cart-shopping"></i>
+              <span className="info-header__count">{totalQuantity}</span>
             </button>
             <button className="info-header__btn" onClick={handleLogout}>
               Sign-Out

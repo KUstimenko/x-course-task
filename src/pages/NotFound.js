@@ -1,14 +1,10 @@
-// import React, { useContext } from "react";
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 import { NavLink } from "react-router-dom";
+import "../pages/notfound.sass";
 
-// import { Link } from "react-router-dom";
-import "../pages/notfound.css";
-// import { UserContext } from "../context/UserContext"; // Import UserContext
-
-export default function NotFound() {
-  // const { user } = useContext(UserContext); // Add UserContext
-  const username = sessionStorage.getItem("username");
+const NotFound = () => {
+  const { username } = useContext(UserContext);
   return (
     <div id="notfound">
       <div class="notfound">
@@ -26,4 +22,5 @@ export default function NotFound() {
       </div>
     </div>
   );
-}
+};
+export default NotFound;

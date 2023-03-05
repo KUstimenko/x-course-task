@@ -1,61 +1,81 @@
-import React, { useState, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import "../pages/signin.css";
+import { UserContext } from "../context/UserContext";
+import "../pages/signin.sass";
 
-export default function Signin() {
+export default function SignIn() {
+  const [value, setValue] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue: setFormValue,
+  } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      username: "",
+    },
+  });
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const { setIsLoggedIn, setUsername } = useContext(UserContext);
+  const isDisabled = value.length < 4 || value.length > 16;
 
   useEffect(() => {
-    setButtonDisabled(username.length < 4 || username.length > 16);
-  }, [username]);
-
-  useEffect(() => {
-    sessionStorage.removeItem("username");
+    localStorage.removeItem("username");
   }, []);
 
-  const handleSignIn = (event) => {
-    event.preventDefault();
-    sessionStorage.setItem("username", username);
-    localStorage.removeItem("cartItems");
+  const onSubmit = (data) => {
+    setUsername(data.username);
+    setIsLoggedIn(true);
+    localStorage.setItem("username", data.username);
     navigate("/");
-  };
-
-  const handleInput = (event) => {
-    const value = event.target.value.trim();
-    if (value.length === 0 || value.indexOf(" ") !== -1) {
-      setUsername(value.replace(/\s/g, ""));
-    } else {
-      setUsername(value);
-    }
   };
 
   return (
     <div className="profile">
       <div className="profile-img"></div>
       <div className="profile-box">
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="user-box">
             <input
               type="text"
-              name="username"
-              required
-              value={username}
-              onInput={handleInput}
+              {...register("username", {
+                required: "enter username",
+                pattern: {
+                  value: /^[A-Za-z0-9_]{4,16}$/,
+                  message:
+                    "enter English letters, but you cannot enter a space",
+                },
+                minLength: {
+                  value: 4,
+                  message: "username should have at least 4 characters",
+                },
+                maxLength: {
+                  value: 16,
+                  message: "username should have at most 16 characters",
+                },
+              })}
+              value={value}
+              onChange={(e) => {
+                setValue(e.target.value);
+                setFormValue("username", e.target.value, {
+                  shouldValidate: true,
+                });
+              }}
             />
-            <label>Username</label>
+            <label className="label">Username</label>
           </div>
-          <button
-            className="profile__btn"
-            disabled={buttonDisabled}
-            onClick={handleSignIn}
-          >
+          {errors.username && (
+            <span className="error">{errors.username.message}</span>
+          )}
+
+          <button className="profile__btn" type="submit" disabled={isDisabled}>
             <span></span>
             <span></span>
             <span></span>
             <span></span>
-            Sign-In
+            {isDisabled ? "Sign-Out" : "Sign-In"}
           </button>
         </form>
       </div>
