@@ -53,7 +53,15 @@ export default function App() {
                 element={<Signin onLogin={handleLogin} />}
               />
               <Route path="/cart" element={<Cart />} />
-              <Route path="/book/:id" element={<SpecificBook />} />
+              <Route
+                path="/book/:id"
+                element={
+                  <>
+                    <SpecificBook />
+                    <ScrollToTop />
+                  </>
+                }
+              />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />
